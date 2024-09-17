@@ -32,9 +32,9 @@ public class UsuarioController {
         usuarioService.insert(ro);
     }
     @PutMapping
-    public void modificar(@RequestBody UsuarioDTO dto) {
+    public void modificar(@RequestBody UsuarioDTO usuariodto) {
         ModelMapper m = new ModelMapper();
-        Usuario ro = m.map(dto, Usuario.class);
+        Usuario ro = m.map(usuariodto, Usuario.class);
         usuarioService.update(ro);
     }
     @DeleteMapping("/{id}")

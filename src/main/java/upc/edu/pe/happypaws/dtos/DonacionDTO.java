@@ -2,7 +2,6 @@ package upc.edu.pe.happypaws.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
-import upc.edu.pe.happypaws.entities.Usuario;
 
 import java.time.LocalDate;
 
