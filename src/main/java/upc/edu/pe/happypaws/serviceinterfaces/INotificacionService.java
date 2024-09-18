@@ -9,4 +9,6 @@ public interface INotificacionService {
     public void insert(Notificacion notificacion);
     public void update(Notificacion notificacion);
     public void delete(int notificacionId);
+    public List<Notificacion> findemisor(int id);
+    public List<Notificacion> findreceptor(int id);
 }

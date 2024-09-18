@@ -9,4 +9,6 @@ public interface IDonacionService {
     public void insert(Donacion donacion);
     public void update(Donacion donacion);
     public void delete(int donacionId);
+    public List<Donacion> findusuario(int id);
+    public List<Donacion> findmontos();
 }

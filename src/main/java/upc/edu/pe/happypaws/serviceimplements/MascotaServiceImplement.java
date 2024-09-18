@@ -33,4 +33,19 @@ public class MascotaServiceImplement implements IMascotaService {
     public void delete(int mascotaId) {
         mascotaRepository.deleteById(mascotaId);
     }
+
+    @Override
+    public List<Mascota> mascotasestado(boolean estado) {
+        return mascotaRepository.findestado(estado);
+    }
+
+    @Override
+    public List<Mascota> mascotasrazas(String raza) {
+        return mascotaRepository.findraza(raza);
+    }
+
+    @Override
+    public List<Mascota> mascotassexo(String sexo) {
+        return mascotaRepository.findsexo(sexo);
+    }
 }

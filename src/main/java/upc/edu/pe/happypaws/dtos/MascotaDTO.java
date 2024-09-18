@@ -1,8 +1,5 @@
 package upc.edu.pe.happypaws.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import upc.edu.pe.happypaws.entities.Albergue;
@@ -20,5 +17,5 @@ public class MascotaDTO {
     private String EstadoMascota;
     private LocalDate FechaIngresoMascota;
     private boolean EstadoAdopcion;
-    private upc.edu.pe.happypaws.entities.Albergue Albergue;
+    private Albergue Albergue;
 }

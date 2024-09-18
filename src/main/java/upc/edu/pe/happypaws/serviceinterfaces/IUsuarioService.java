@@ -9,4 +9,6 @@ public interface IUsuarioService {
     public void insert(Usuario usuario);
     public void update(Usuario usuario);
     public void delete(int usuarioId);
+    public List<Usuario> searchEmail(String email);
+    public List<Usuario> findactivos();
 }

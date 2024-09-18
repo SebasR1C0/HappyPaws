@@ -33,4 +33,9 @@ public class ComentarioServiceImplement implements IComentarioService {
     public void delete(int comentarioId) {
         comentarioRepository.deleteById(comentarioId);
     }
+
+    @Override
+    public List<Comentario> findname(String name) {
+        return comentarioRepository.findalbergue(name);
+    }
 }

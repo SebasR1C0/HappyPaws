@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.AlbergueDTO;
 import upc.edu.pe.happypaws.dtos.CitaDTO;
+import upc.edu.pe.happypaws.dtos.MascotaDTO;
+import upc.edu.pe.happypaws.dtos.UsuarioDTO;
 import upc.edu.pe.happypaws.entities.Albergue;
 import upc.edu.pe.happypaws.entities.Cita;
 import upc.edu.pe.happypaws.serviceinterfaces.ICitaService;
@@ -41,5 +43,33 @@ public class CitaController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         citaService.delete(id);
+    }
+    @GetMapping("/buscarxid")
+    public List<CitaDTO> buscarporid(@RequestParam("id") Integer id){
+        return citaService.findid(id).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,CitaDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/buscarxusuario")
+    public List<CitaDTO> buscarporusuario(@RequestParam("id") Integer id){
+        return citaService.findusuario(id).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,CitaDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/buscarxalbergue")
+    public List<CitaDTO> buscarporalbergue(@RequestParam("id") Integer id){
+        return citaService.findalbergue(id).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,CitaDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/buscarxpendiente")
+    public List<CitaDTO> buscarporpendiente(){
+        return citaService.findpendiente().stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,CitaDTO.class);
+        }).collect(Collectors.toList());
     }
 }
