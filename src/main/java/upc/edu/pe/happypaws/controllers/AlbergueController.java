@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.AlbergueDTO;
+import upc.edu.pe.happypaws.dtos.CitaDTO;
 import upc.edu.pe.happypaws.entities.Albergue;
 import upc.edu.pe.happypaws.serviceinterfaces.IAlbergueService;
 
@@ -39,5 +40,12 @@ public class AlbergueController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         albergueService.delete(id);
+    }
+    @GetMapping("/buscarxnombre")
+    public List<AlbergueDTO> buscarpornombre(@RequestParam("name") String name){
+        return albergueService.findalbergue(name).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,AlbergueDTO.class);
+        }).collect(Collectors.toList());
     }
 }

@@ -33,4 +33,24 @@ public class CitaServiceImplement implements ICitaService {
     public void delete(int citaId) {
         citaRepository.deleteById(citaId);
     }
+
+    @Override
+    public List<Cita> findid(int id) {
+        return citaRepository.findid(id);
+    }
+
+    @Override
+    public List<Cita> findusuario(int id) {
+        return citaRepository.findusuario(id);
+    }
+
+    @Override
+    public List<Cita> findalbergue(int id) {
+        return citaRepository.findalbergue(id);
+    }
+
+    @Override
+    public List<Cita> findpendiente() {
+        return citaRepository.findpendiente();
+    }
 }

@@ -33,4 +33,15 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public void delete(int usuarioId) {
         usuarioRepository.deleteById(usuarioId);
     }
+
+    @Override
+    public List<Usuario> searchEmail(String email) {
+        return usuarioRepository.findEmail(email);
+    }
+
+    @Override
+    public List<Usuario> findactivos() {
+        return usuarioRepository.findactivos();
+    }
+
 }

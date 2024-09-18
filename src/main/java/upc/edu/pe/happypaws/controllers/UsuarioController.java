@@ -41,4 +41,19 @@ public class UsuarioController {
     public void eliminar(@PathVariable("id") Integer id){
         usuarioService.delete(id);
     }
+
+    @GetMapping("/recuperar")
+    public List<UsuarioDTO> recuperar(@RequestParam("email") String email){
+        return usuarioService.searchEmail(email).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/activos")
+    public List<UsuarioDTO> activos(){
+        return usuarioService.findactivos().stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

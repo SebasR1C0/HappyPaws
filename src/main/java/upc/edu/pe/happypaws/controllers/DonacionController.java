@@ -42,4 +42,18 @@ public class DonacionController {
     public void eliminar(@PathVariable("id") Integer id){
         donacionService.delete(id);
     }
+    @GetMapping("/buscarxusuario")
+    public List<DonacionDTO> buscarporusuario(@RequestParam("id") int id){
+        return donacionService.findusuario(id).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,DonacionDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/buscarxmonto")
+    public List<DonacionDTO> buscarpormonto(){
+        return donacionService.findmontos().stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,DonacionDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

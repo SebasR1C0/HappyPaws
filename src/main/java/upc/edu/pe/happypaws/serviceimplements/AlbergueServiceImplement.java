@@ -33,4 +33,9 @@ public class AlbergueServiceImplement implements IAlbergueService {
     public void delete(int albergueId) {
         albergueRepository.deleteById(albergueId);
     }
+
+    @Override
+    public List<Albergue> findalbergue(String albergueName) {
+        return albergueRepository.findname(albergueName);
+    }
 }

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.AlbergueDTO;
+import upc.edu.pe.happypaws.dtos.CitaDTO;
 import upc.edu.pe.happypaws.dtos.ComentarioDTO;
 import upc.edu.pe.happypaws.entities.Albergue;
 import upc.edu.pe.happypaws.entities.Comentario;
@@ -41,5 +42,12 @@ public class ComentarioController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         comentarioService.delete(id);
+    }
+    @GetMapping("/buscarxnombre")
+    public List<ComentarioDTO> recuperar(@RequestParam("name") String name){
+        return comentarioService.findname(name).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,ComentarioDTO.class);
+        }).collect(Collectors.toList());
     }
 }

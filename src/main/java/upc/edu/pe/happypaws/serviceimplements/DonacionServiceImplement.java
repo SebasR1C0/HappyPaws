@@ -33,4 +33,14 @@ public class DonacionServiceImplement implements IDonacionService {
     public void delete(int donacionId) {
         donacionRepository.deleteById(donacionId);
     }
+
+    @Override
+    public List<Donacion> findusuario(int id) {
+        return donacionRepository.findusuario(id);
+    }
+
+    @Override
+    public List<Donacion> findmontos() {
+        return donacionRepository.findmontos();
+    }
 }

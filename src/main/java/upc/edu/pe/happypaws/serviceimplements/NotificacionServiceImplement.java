@@ -33,4 +33,14 @@ public class NotificacionServiceImplement implements INotificacionService {
     public void delete(int notificacionId) {
         notificacionRepository.deleteById(notificacionId);
     }
+
+    @Override
+    public List<Notificacion> findemisor(int id) {
+        return notificacionRepository.findemisor(id);
+    }
+
+    @Override
+    public List<Notificacion> findreceptor(int id) {
+        return notificacionRepository.findreceptor(id);
+    }
 }

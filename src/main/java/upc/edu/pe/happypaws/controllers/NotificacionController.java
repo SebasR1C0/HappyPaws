@@ -3,6 +3,7 @@ package upc.edu.pe.happypaws.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.happypaws.dtos.MascotaDTO;
 import upc.edu.pe.happypaws.dtos.NotificacionDTO;
 import upc.edu.pe.happypaws.entities.Notificacion;
 import upc.edu.pe.happypaws.serviceinterfaces.INotificacionService;
@@ -39,5 +40,19 @@ public class NotificacionController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         notificacionService.delete(id);
+    }
+    @GetMapping("/buscarxemisor")
+    public List<NotificacionDTO> buscarporemisor(@RequestParam("id") int id){
+        return notificacionService.findemisor(id).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,NotificacionDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @GetMapping("/buscarxrecepetor")
+    public List<NotificacionDTO> buscarporreceptor(@RequestParam("id") int id){
+        return notificacionService.findreceptor(id).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,NotificacionDTO.class);
+        }).collect(Collectors.toList());
     }
 }
