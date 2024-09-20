@@ -32,4 +32,9 @@ public class RolServiceImplement implements IRolService {
     public void delete(int rolId) {
         rolRepository.deleteById(rolId);
     }
+
+    @Override
+    public List<String[]> countrol() {
+        return rolRepository.countrol();
+    }
 }

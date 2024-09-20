@@ -3,11 +3,14 @@ package upc.edu.pe.happypaws.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.happypaws.dtos.AlbergueByCountDTO;
 import upc.edu.pe.happypaws.dtos.AlbergueDTO;
 import upc.edu.pe.happypaws.dtos.CitaDTO;
+import upc.edu.pe.happypaws.dtos.DonacionByNameDTO;
 import upc.edu.pe.happypaws.entities.Albergue;
 import upc.edu.pe.happypaws.serviceinterfaces.IAlbergueService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +47,27 @@ public class AlbergueController {
     @GetMapping("/buscarxnombre")
     public List<AlbergueDTO> buscarpornombre(@RequestParam("name") String name){
         return albergueService.findalbergue(name).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,AlbergueDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/alberguexcantidad")
+    public List<AlbergueByCountDTO> albergueporcantidad(){
+        List<String[]> lista = albergueService.albergueporcantidad();
+        List<AlbergueByCountDTO> ListDTO = new ArrayList<>();
+        for (String[] columna:lista) {
+            AlbergueByCountDTO dto = new AlbergueByCountDTO();
+            dto.setNombreAlbergue(columna[0]);
+            dto.setCapacidad(Integer.parseInt(columna[1]));
+            ListDTO.add(dto);
+        }
+        return ListDTO;
+    }
+
+    @GetMapping("/abiertoahora")
+    public List<AlbergueDTO> abiertoahora(){
+        return albergueService.AbiertoAhora().stream().map(x->{
             ModelMapper m = new ModelMapper();
             return m.map(x,AlbergueDTO.class);
         }).collect(Collectors.toList());

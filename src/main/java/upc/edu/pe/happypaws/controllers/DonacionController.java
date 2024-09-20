@@ -3,12 +3,15 @@ package upc.edu.pe.happypaws.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.happypaws.dtos.DonacionByNameDTO;
 import upc.edu.pe.happypaws.dtos.DonacionDTO;
 import upc.edu.pe.happypaws.dtos.NotificacionDTO;
+import upc.edu.pe.happypaws.dtos.RolByUserDTO;
 import upc.edu.pe.happypaws.entities.Donacion;
 import upc.edu.pe.happypaws.entities.Notificacion;
 import upc.edu.pe.happypaws.serviceinterfaces.IDonacionService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,5 +58,19 @@ public class DonacionController {
             ModelMapper m = new ModelMapper();
             return m.map(x,DonacionDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/donacionxnombre")
+    public List<DonacionByNameDTO> donacionpornombre(){
+        List<String[]> lista = donacionService.donacionesxnombre();
+        List<DonacionByNameDTO> ListDTO = new ArrayList<>();
+        for (String[] columna:lista) {
+            DonacionByNameDTO dto = new DonacionByNameDTO();
+            dto.setNombre(columna[0]);
+            dto.setApellido(columna[1]);
+            dto.setMontoTotal(Double.parseDouble(columna[2]));
+            ListDTO.add(dto);
+        }
+        return ListDTO;
     }
 }

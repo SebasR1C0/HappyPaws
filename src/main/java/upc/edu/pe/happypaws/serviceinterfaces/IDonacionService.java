@@ -11,4 +11,5 @@ public interface IDonacionService {
     public void delete(int donacionId);
     public List<Donacion> findusuario(int id);
     public List<Donacion> findmontos();
+    public List<String[]> donacionesxnombre();
 }

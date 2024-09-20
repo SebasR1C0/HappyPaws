@@ -6,6 +6,7 @@ import upc.edu.pe.happypaws.entities.Notificacion;
 import upc.edu.pe.happypaws.repositories.INotificacionRepository;
 import upc.edu.pe.happypaws.serviceinterfaces.INotificacionService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -42,5 +43,10 @@ public class NotificacionServiceImplement implements INotificacionService {
     @Override
     public List<Notificacion> findreceptor(int id) {
         return notificacionRepository.findreceptor(id);
+    }
+
+    @Override
+    public List<String[]> notifiacionxfecha(LocalDate fecha) {
+        return notificacionRepository.notifiacionxfecha(fecha);
     }
 }

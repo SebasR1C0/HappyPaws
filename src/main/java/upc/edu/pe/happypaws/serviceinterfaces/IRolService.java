@@ -9,4 +9,5 @@ public interface IRolService {
     public void insert(Rol rol);
     public void update(Rol rol);
     public void delete(int rolId);
+    public List<String[]> countrol();
 }
