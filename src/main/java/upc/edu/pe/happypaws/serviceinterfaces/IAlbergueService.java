@@ -10,4 +10,6 @@ public interface IAlbergueService {
     public void update(Albergue albergue);
     public void delete(int albergueId);
     public List<Albergue> findalbergue(String albergueName);
+    public List<Albergue> AbiertoAhora();
+    public List<String[]> albergueporcantidad();
 }

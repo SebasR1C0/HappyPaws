@@ -4,10 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.MascotaDTO;
+import upc.edu.pe.happypaws.dtos.NotificacionByDateDTO;
 import upc.edu.pe.happypaws.dtos.NotificacionDTO;
+import upc.edu.pe.happypaws.dtos.RolByUserDTO;
 import upc.edu.pe.happypaws.entities.Notificacion;
 import upc.edu.pe.happypaws.serviceinterfaces.INotificacionService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,5 +58,19 @@ public class NotificacionController {
             ModelMapper m = new ModelMapper();
             return m.map(x,NotificacionDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/notificacionxfecha")
+    public List<NotificacionByDateDTO> notificacionporfecha(@RequestParam("fecha") LocalDate fecha){
+        List<String[]> lista = notificacionService.notifiacionxfecha(fecha);
+        List<NotificacionByDateDTO> ListDTO = new ArrayList<>();
+        for (String[] columna:lista) {
+            NotificacionByDateDTO dto = new NotificacionByDateDTO();
+            dto.setNombre(columna[0]);
+            dto.setApellido(columna[1]);
+            dto.setCantidad(Integer.parseInt(columna[2]));
+            ListDTO.add(dto);
+        }
+        return ListDTO;
     }
 }

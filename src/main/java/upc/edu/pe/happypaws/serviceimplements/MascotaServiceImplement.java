@@ -48,4 +48,14 @@ public class MascotaServiceImplement implements IMascotaService {
     public List<Mascota> mascotassexo(String sexo) {
         return mascotaRepository.findsexo(sexo);
     }
+
+    @Override
+    public List<String[]> mascotaxraza() {
+        return mascotaRepository.mascotaxraza();
+    }
+
+    @Override
+    public List<String[]> mascotaxadopcion() {
+        return mascotaRepository.mascotaxadopcion();
+    }
 }

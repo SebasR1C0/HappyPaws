@@ -43,4 +43,9 @@ public class DonacionServiceImplement implements IDonacionService {
     public List<Donacion> findmontos() {
         return donacionRepository.findmontos();
     }
+
+    @Override
+    public List<String[]> donacionesxnombre() {
+        return donacionRepository.donacionesxnombre();
+    }
 }

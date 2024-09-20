@@ -38,4 +38,14 @@ public class AlbergueServiceImplement implements IAlbergueService {
     public List<Albergue> findalbergue(String albergueName) {
         return albergueRepository.findname(albergueName);
     }
+
+    @Override
+    public List<Albergue> AbiertoAhora() {
+        return albergueRepository.AbiertoAhora();
+    }
+
+    @Override
+    public List<String[]> albergueporcantidad() {
+        return albergueRepository.albergueporcantidad();
+    }
 }

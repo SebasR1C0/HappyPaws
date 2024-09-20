@@ -3,13 +3,12 @@ package upc.edu.pe.happypaws.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import upc.edu.pe.happypaws.dtos.DonacionDTO;
-import upc.edu.pe.happypaws.dtos.MascotaDTO;
-import upc.edu.pe.happypaws.dtos.UsuarioDTO;
+import upc.edu.pe.happypaws.dtos.*;
 import upc.edu.pe.happypaws.entities.Donacion;
 import upc.edu.pe.happypaws.entities.Mascota;
 import upc.edu.pe.happypaws.serviceinterfaces.IMascotaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,5 +62,32 @@ public class MascotaController {
             ModelMapper m = new ModelMapper();
             return m.map(x,MascotaDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/mascotaxraza")
+    public List<MascotaByRazaDTO> mascotaporraza(){
+        List<String[]> lista = mascotaService.mascotaxraza();
+        List<MascotaByRazaDTO> ListDTO = new ArrayList<>();
+        for (String[] columna:lista) {
+            MascotaByRazaDTO dto = new MascotaByRazaDTO();
+            dto.setAlbergue(columna[0]);
+            dto.setRaza(columna[1]);
+            dto.setCount(Integer.parseInt(columna[2]));
+            ListDTO.add(dto);
+        }
+        return ListDTO;
+    }
+
+    @GetMapping("/mascotaxadopcion")
+    public List<MascotaByAdopcionDTO> mascotaporadopcion(){
+        List<String[]> lista = mascotaService.mascotaxadopcion();
+        List<MascotaByAdopcionDTO> ListDTO = new ArrayList<>();
+        for (String[] columna:lista) {
+            MascotaByAdopcionDTO dto = new MascotaByAdopcionDTO();
+            dto.setNombreAlbergue(columna[0]);
+            dto.setCount(Integer.parseInt(columna[1]));
+            ListDTO.add(dto);
+        }
+        return ListDTO;
     }
 }
