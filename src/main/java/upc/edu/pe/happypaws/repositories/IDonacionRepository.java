@@ -18,8 +18,8 @@ public interface IDonacionRepository extends JpaRepository<Donacion, Integer> {
     public List<Donacion> findmontos();
 
     @Query(value = "SELECT u.nombre, u.apellido, SUM(d.monto) AS Monto_Total\n" +
-            " FROM Donacion d JOIN Usuario u \n" +
-            " ON d.id_usuario = u.id_usuario\n" +
+            " FROM Donacion d JOIN Users u \n" +
+            " ON d.id_usuario = u.id\n" +
             " GROUP BY u.nombre, u.apellido\n" +
             " ORDER BY Monto_Total DESC", nativeQuery = true)
     public List<String[]> donacionesxnombre();

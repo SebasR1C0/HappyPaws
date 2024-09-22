@@ -2,6 +2,7 @@ package upc.edu.pe.happypaws.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.AlbergueDTO;
 import upc.edu.pe.happypaws.dtos.CitaDTO;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("citas")
+@PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
 public class CitaController {
     @Autowired
     private ICitaService citaService;

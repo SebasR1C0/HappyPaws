@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UsuarioDTO {
-    private int IdUsuario;
+    private Long id;
     private String Nombre;
     private String Apellido;
     private String Direccion;
@@ -18,8 +18,7 @@ public class UsuarioDTO {
     private String Email;
     private String Genero;
     private LocalDate FechaRegistro;
-    private String EstadoUsuario;
-    private String Usuario;
-    private String Password;
-    private Rol rol;
+    private Boolean enabled;
+    private String username;
+    private String password;
 }

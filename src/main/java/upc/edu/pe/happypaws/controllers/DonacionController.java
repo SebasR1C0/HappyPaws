@@ -2,13 +2,11 @@ package upc.edu.pe.happypaws.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.DonacionByNameDTO;
 import upc.edu.pe.happypaws.dtos.DonacionDTO;
-import upc.edu.pe.happypaws.dtos.NotificacionDTO;
-import upc.edu.pe.happypaws.dtos.RolByUserDTO;
 import upc.edu.pe.happypaws.entities.Donacion;
-import upc.edu.pe.happypaws.entities.Notificacion;
 import upc.edu.pe.happypaws.serviceinterfaces.IDonacionService;
 
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ public class DonacionController {
     private IDonacionService donacionService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public List<DonacionDTO> listar() {
         return donacionService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -30,22 +29,26 @@ public class DonacionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public void insertar(@RequestBody DonacionDTO donacionDTO) {
         ModelMapper m = new ModelMapper();
         Donacion donacion = m.map(donacionDTO, Donacion.class);
         donacionService.insert(donacion);
     }
     @PutMapping
+    @PreAuthorize("hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public void modificar(@RequestBody DonacionDTO donacionDTO) {
         ModelMapper m = new ModelMapper();
         Donacion donacion = m.map(donacionDTO, Donacion.class);
         donacionService.update(donacion);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") Integer id){
         donacionService.delete(id);
     }
     @GetMapping("/buscarxusuario")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public List<DonacionDTO> buscarporusuario(@RequestParam("id") int id){
         return donacionService.findusuario(id).stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -53,6 +56,7 @@ public class DonacionController {
         }).collect(Collectors.toList());
     }
     @GetMapping("/buscarxmonto")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public List<DonacionDTO> buscarpormonto(){
         return donacionService.findmontos().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -61,6 +65,7 @@ public class DonacionController {
     }
 
     @GetMapping("/donacionxnombre")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public List<DonacionByNameDTO> donacionpornombre(){
         List<String[]> lista = donacionService.donacionesxnombre();
         List<DonacionByNameDTO> ListDTO = new ArrayList<>();
