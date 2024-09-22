@@ -11,6 +11,7 @@
     <groupId>upc.edu.pe</groupId>
     <artifactId>HappyPaws</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>HappyPaws</name>
     <description>HappyPaws</description>
     <url/>
