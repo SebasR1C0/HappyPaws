@@ -4,11 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import upc.edu.pe.happypaws.dtos.AlbergueDTO;
 import upc.edu.pe.happypaws.dtos.CitaDTO;
-import upc.edu.pe.happypaws.dtos.MascotaDTO;
-import upc.edu.pe.happypaws.dtos.UsuarioDTO;
-import upc.edu.pe.happypaws.entities.Albergue;
 import upc.edu.pe.happypaws.entities.Cita;
 import upc.edu.pe.happypaws.serviceinterfaces.ICitaService;
 
