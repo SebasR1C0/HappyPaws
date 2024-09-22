@@ -2,6 +2,7 @@ package upc.edu.pe.happypaws.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.ComprobanteDTO;
 import upc.edu.pe.happypaws.entities.Comprobante;
@@ -17,7 +18,9 @@ public class ComprobanteController {
     private IComprobanteService comprobanteService;
 
     @GetMapping
-    public List<ComprobanteDTO> listar() {
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public List<ComprobanteDTO>
+    listar() {
         return comprobanteService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, ComprobanteDTO.class);
@@ -25,18 +28,21 @@ public class ComprobanteController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public void insertar(@RequestBody ComprobanteDTO comprobanteDTO) {
         ModelMapper m = new ModelMapper();
         Comprobante comprobante = m.map(comprobanteDTO, Comprobante.class);
         comprobanteService.insert(comprobante);
     }
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void modificar(@RequestBody ComprobanteDTO comprobanteDTO) {
         ModelMapper m = new ModelMapper();
         Comprobante comprobante = m.map(comprobanteDTO, Comprobante.class);
         comprobanteService.update(comprobante);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") Integer id){
         comprobanteService.delete(id);
     }

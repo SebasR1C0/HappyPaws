@@ -10,9 +10,8 @@ import upc.edu.pe.happypaws.entities.Usuario;
 import java.util.List;
 
 @Repository
-public interface IRolRepository extends JpaRepository<Rol, Integer> {
-    @Query(value = "SELECT r.nombre_rol, COUNT(u.id_usuario) AS Cantidad_Usuarios\n" +
-            " FROM Usuario u JOIN Rol r \n" +
-            " ON u.id_rol = r.id_rol GROUP BY r.nombre_rol;", nativeQuery = true)
+public interface IRolRepository extends JpaRepository<Rol, Long> {
+    @Query(value = "SELECT r.rol, COUNT(r.user_id) AS Cantidad_Usuarios" +
+            " FROM Roles  r GROUP BY r.rol", nativeQuery = true)
     public List<String[]> countrol();
 }

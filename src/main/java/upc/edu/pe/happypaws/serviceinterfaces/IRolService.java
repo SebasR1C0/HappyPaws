@@ -8,6 +8,6 @@ public interface IRolService {
     public List<Rol> list();
     public void insert(Rol rol);
     public void update(Rol rol);
-    public void delete(int rolId);
+    public void delete(Long rolId);
     public List<String[]> countrol();
 }

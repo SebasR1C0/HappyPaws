@@ -30,7 +30,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public void delete(int usuarioId) {
+    public void delete(Long usuarioId) {
         usuarioRepository.deleteById(usuarioId);
     }
 
@@ -42,6 +42,16 @@ public class UsuarioServiceImplement implements IUsuarioService {
     @Override
     public List<Usuario> findactivos() {
         return usuarioRepository.findactivos();
+    }
+
+    @Override
+    public Usuario findOneByUsername(String user) {
+        return usuarioRepository.findOneByUsername(user);
+    }
+
+    @Override
+    public Long findByUsername(String user) {
+        return usuarioRepository.findByUsername(user);
     }
 
 }

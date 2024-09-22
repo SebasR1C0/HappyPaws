@@ -29,7 +29,7 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public void delete(int rolId) {
+    public void delete(Long rolId) {
         rolRepository.deleteById(rolId);
     }
 

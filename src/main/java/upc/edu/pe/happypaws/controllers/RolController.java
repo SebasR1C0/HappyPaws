@@ -2,6 +2,7 @@ package upc.edu.pe.happypaws.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.NotificacionDTO;
 import upc.edu.pe.happypaws.dtos.RolByUserDTO;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
+@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class RolController {
     @Autowired
     private IRolService rolService;
@@ -40,7 +42,7 @@ public class RolController {
         rolService.update(rol);
     }
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable("id") Integer id){
+    public void eliminar(@PathVariable("id") Long id){
         rolService.delete(id);
     }
 

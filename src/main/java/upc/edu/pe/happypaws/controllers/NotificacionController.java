@@ -2,6 +2,7 @@ package upc.edu.pe.happypaws.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.happypaws.dtos.MascotaDTO;
 import upc.edu.pe.happypaws.dtos.NotificacionByDateDTO;
@@ -22,6 +23,7 @@ public class NotificacionController {
     private INotificacionService notificacionService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public List<NotificacionDTO> listar() {
         return notificacionService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -30,22 +32,26 @@ public class NotificacionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public void insertar(@RequestBody NotificacionDTO notificacionDTO) {
         ModelMapper m = new ModelMapper();
         Notificacion notifiacion = m.map(notificacionDTO, Notificacion.class);
         notificacionService.insert(notifiacion);
     }
     @PutMapping
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public void modificar(@RequestBody NotificacionDTO notificacionDTO) {
         ModelMapper m = new ModelMapper();
         Notificacion notificacion = m.map(notificacionDTO, Notificacion.class);
         notificacionService.update(notificacion);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") Integer id){
         notificacionService.delete(id);
     }
     @GetMapping("/buscarxemisor")
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public List<NotificacionDTO> buscarporemisor(@RequestParam("id") int id){
         return notificacionService.findemisor(id).stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -53,6 +59,7 @@ public class NotificacionController {
         }).collect(Collectors.toList());
     }
     @GetMapping("/buscarxrecepetor")
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public List<NotificacionDTO> buscarporreceptor(@RequestParam("id") int id){
         return notificacionService.findreceptor(id).stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -61,6 +68,7 @@ public class NotificacionController {
     }
 
     @GetMapping("/notificacionxfecha")
+    @PreAuthorize("hasAuthority('ALBERGUE') or hasAuthority('CLIENTE') OR hasAuthority('ADMINISTRADOR')")
     public List<NotificacionByDateDTO> notificacionporfecha(@RequestParam("fecha") LocalDate fecha){
         List<String[]> lista = notificacionService.notifiacionxfecha(fecha);
         List<NotificacionByDateDTO> ListDTO = new ArrayList<>();

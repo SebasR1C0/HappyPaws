@@ -1,23 +1,33 @@
 package upc.edu.pe.happypaws.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Usuario")
-public class Usuario {
+@Table(name = "Users")
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IdUsuario;
+    private Long id;
+
+    @Column(unique = true, length = 30)
+    private String username;
+    @Column(length = 200)
+    private String password;
+
+    private Boolean enabled;
 
     @Column(name = "Nombre",length = 40,nullable = false)
     private String Nombre;
@@ -40,16 +50,8 @@ public class Usuario {
     @Column(name = "FechaRegistro",nullable = false)
     private LocalDate FechaRegistro;
 
-    @Column(name = "Usuario",length = 40,nullable = false)
-    private String Usuario;
-
-    @Column(name = "Password",length = 40,nullable = false)
-    private String Password;
-
-    @Column(name = "EstadoUsuari",length = 40,nullable = false)
-    private String EstadoUsuario;
-
-    @ManyToOne
-    @JoinColumn(name = "IdRol")
-    private Rol rol;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Rol> roles;
 }

@@ -19,8 +19,8 @@ public interface INotificacionRepository extends JpaRepository<Notificacion, Int
     public List<Notificacion> findreceptor(@Param("id") int id);
 
     @Query(value = "SELECT u.nombre, u.apellido, COUNT(n.id_notificacion) AS Cantidad_Notificaciones\n" +
-            " FROM Notificacion n JOIN Usuario u\n" +
-            " ON n.id_usuario = u.id_usuario Where n.fecha_envio = :fecha \n" +
+            " FROM Notificacion n JOIN Users u\n" +
+            " ON n.id_usuario = u.id Where n.fecha_envio = :fecha \n" +
             " GROUP BY u.nombre, u.apellido\n" +
             "Order By Cantidad_Notificaciones DESC", nativeQuery = true)
     public List<String[]> notifiacionxfecha(@Param("fecha") LocalDate fecha);

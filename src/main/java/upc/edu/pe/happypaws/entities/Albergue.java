@@ -23,13 +23,13 @@ public class Albergue {
     @Column(name = "NombreAlbergue", nullable = false, length = 30)
     private String NombreAlbergue;
 
-    @Column(name = "DireccionAlbergue", nullable = false, length = 30)
+    @Column(name = "DireccionAlbergue", nullable = false, length = 100)
     private String DireccionAlbergue;
 
     @Column(name = "TelefonoAlbergue", nullable = false, length = 30)
     private String TelefonoAlbergue;
 
-    @Column(name = "EmailAlbergue", nullable = false, length = 30)
+    @Column(name = "EmailAlbergue", nullable = false, length = 100)
     private String EmailAlbergue;
 
     @Column(name = "CapacidadMaxima", nullable = false)

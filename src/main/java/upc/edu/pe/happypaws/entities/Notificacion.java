@@ -19,7 +19,7 @@ public class Notificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int IdNotificacion;
 
-    @Column(name = "Mensaje", nullable = false, length = 30)
+    @Column(name = "Mensaje", nullable = false, length = 100)
     private String Mensaje;
 
     @Column(name = "IdEmisor", nullable = false)

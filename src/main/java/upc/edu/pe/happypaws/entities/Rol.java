@@ -11,13 +11,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Rol")
+@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IdRol;
+    private Long id;
 
-    @Column(name = "NombreRol", nullable = false, length = 20)
-    private String NombreRol;
+    @Column(name = "rol", nullable = false, length = 20)
+    private String rol;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Usuario user;
 
 }
